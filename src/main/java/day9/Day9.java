@@ -8,8 +8,6 @@ import java.util.List;
 
 import org.apache.commons.collections.list.TreeList;
 
-import utils.FileUtils;
-
 @SuppressWarnings("unchecked")
 public class Day9 {
 
@@ -23,11 +21,6 @@ public class Day9 {
     private int          currentIndex = 1;
 
     private List<Player> players;
-
-    public List<String> getLines(String input) {
-        FileUtils fileHelper = new FileUtils();
-        return fileHelper.readStringLines(input);
-    }
 
     public void initGame(String line) {
         numPlayers = helper.extractPlayers(line);

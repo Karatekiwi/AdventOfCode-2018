@@ -7,14 +7,18 @@ import java.util.List;
 
 import org.junit.Test;
 
+import utils.FileUtils;
+
 public class Day9Tester {
 
     private static final String DAY9_TEST_INPUT = "day9/test.txt";
-    private Day9                challenge       = new Day9();
+
+    private FileUtils           fileHelper      = new FileUtils();
 
     @Test
     public void testPartOne() {
-        List<String> lines = challenge.getLines(DAY9_TEST_INPUT);
+        Day9 challenge = new Day9();
+        List<String> lines = fileHelper.readStringLines(DAY9_TEST_INPUT);
 
         for (String line : lines) {
             challenge = new Day9();
