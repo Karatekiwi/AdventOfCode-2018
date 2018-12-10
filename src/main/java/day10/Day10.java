@@ -51,7 +51,9 @@ public class Day10 {
             int posX = point.getPosX();
             int posY = point.getPosY();
 
-            grid[posY][posX] = "#";
+            if (posX > 0 && posY > 0) {
+                grid[posY][posX] = "#";
+            }
         }
 
         printToFile(grid, index);
