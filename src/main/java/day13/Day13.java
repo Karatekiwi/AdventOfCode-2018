@@ -3,6 +3,8 @@ package day13;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,12 +33,35 @@ public class Day13 {
     }
 
     public String getPartOne() {
+        print();
+
         while (noCrash) {
+            sortCarts();
             moveCarts();
             // print();
         }
 
         return crashLocation;
+    }
+
+    private void sortCarts() {
+        Collections.sort(carts, new Comparator<Cart>() {
+
+            @Override
+            public int compare(Cart c1, Cart c2) {
+                if (c1.getY() < c2.getY()) {
+                    return -1;
+                }
+
+                if (c1.getY() > c2.getY()) {
+                    return 1;
+                }
+
+                return Integer.compare(c1.getX(), c2.getX());
+
+            }
+        });
+
     }
 
     private void initCarts() {
@@ -80,71 +105,24 @@ public class Day13 {
     }
 
     private void moveCart(Cart cart) {
-        Direction movementDirection = cart.getMovementDirection();
         int x = cart.getX();
         int y = cart.getY();
         String current = grid[y][x];
+        movement.changeDirection(cart, current);
+        Direction movementDirection = cart.getMovementDirection();
 
         switch (movementDirection) {
             case RIGHT:
-                try {
-                    String guide1 = grid[y][x + 1];
-                    movement.changeDirection(cart, guide1, movementDirection);
-                    setAndCheck(cart, cart.getX() + 1, cart.getY());
-                } catch (Exception ex) {
-                    if ("/".equals(current)) {
-                        cart.setMovementDirection(Direction.UP);
-                        cart.setY(cart.getY() - 1);
-                    } else {
-                        cart.setMovementDirection(Direction.DOWN);
-                        cart.setY(cart.getY() + 1);
-                    }
-                }
+                setAndCheck(cart, cart.getX() + 1, cart.getY());
                 break;
             case DOWN:
-                try {
-                    String guide2 = grid[y + 1][x];
-                    movement.changeDirection(cart, guide2, movementDirection);
-                    setAndCheck(cart, cart.getX(), cart.getY() + 1);
-                } catch (Exception ex) {
-                    if ("/".equals(current)) {
-                        cart.setMovementDirection(Direction.LEFT);
-                        cart.setX(cart.getX() - 1);
-                    } else {
-                        cart.setMovementDirection(Direction.RIGHT);
-                        cart.setX(cart.getX() + 1);
-                    }
-                }
+                setAndCheck(cart, cart.getX(), cart.getY() + 1);
                 break;
             case LEFT:
-                try {
-                    String guide3 = grid[y][x - 1];
-                    movement.changeDirection(cart, guide3, movementDirection);
-                    setAndCheck(cart, cart.getX() - 1, cart.getY());
-                } catch (Exception ex) {
-                    if ("\\".equals(current)) {
-                        cart.setMovementDirection(Direction.UP);
-                        cart.setY(cart.getY() - 1);
-                    } else {
-                        cart.setMovementDirection(Direction.DOWN);
-                        cart.setY(cart.getY() + 1);
-                    }
-                }
+                setAndCheck(cart, cart.getX() - 1, cart.getY());
                 break;
             case UP:
-                try {
-                    String guide4 = grid[y - 1][x];
-                    movement.changeDirection(cart, guide4, movementDirection);
-                    setAndCheck(cart, cart.getX(), cart.getY() - 1);
-                } catch (Exception ex) {
-                    if ("\\".equals(current)) {
-                        cart.setMovementDirection(Direction.LEFT);
-                        cart.setX(cart.getX() - 1);
-                    } else {
-                        cart.setMovementDirection(Direction.RIGHT);
-                        cart.setX(cart.getX() + 1);
-                    }
-                }
+                setAndCheck(cart, cart.getX(), cart.getY() - 1);
                 break;
             default:
                 break;
@@ -237,6 +215,7 @@ public class Day13 {
         print();
 
         while (multipleCarsLeft) {
+            sortCarts();
             moveCarts();
             // print();
         }

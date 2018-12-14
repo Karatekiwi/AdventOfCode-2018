@@ -11,7 +11,9 @@ package day13;
 
 public class MovementHelper {
 
-    public void changeDirection(Cart cart, String guide, Direction direction) {
+    public void changeDirection(Cart cart, String guide) {
+        Direction direction = cart.getMovementDirection();
+
         switch (guide) {
             case "\\":
                 if (Direction.RIGHT == direction) {

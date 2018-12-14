@@ -13,7 +13,7 @@ public class StartDay13 {
         String crashLocation = challenge.getPartOne();
         System.out.println(String.format("The location for the first crash is %s.", crashLocation));
 
-        // init again
+        // // init again
         challenge = new Day13();
         challenge.initGame(DAY13_INPUT_TXT, 150, 150);
         String lastCartLocation = challenge.getPartTwo();
