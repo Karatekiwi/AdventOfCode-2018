@@ -78,13 +78,7 @@ public class Day11 {
     }
 
     private int trimToHundred(int powerLevel) {
-        if (powerLevel < 100) {
-            return 0;
-        }
-
-        // now this is ugly
-        String powerString = String.valueOf(powerLevel);
-        return Integer.parseInt(powerString.substring(powerString.length() - 3, powerString.length() - 2));
+        return powerLevel / 100 % 10;
     }
 
 }
