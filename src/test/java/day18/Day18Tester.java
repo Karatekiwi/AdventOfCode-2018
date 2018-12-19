@@ -1,6 +1,8 @@
 
 package day18;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class Day18Tester {
@@ -10,7 +12,10 @@ public class Day18Tester {
     @Test
     public void testPartOne() {
         Day18 challenge = new Day18();
-        challenge.initGame(DAY18_TEST_INPUT, 7, 7);
+        challenge.initGame(DAY18_TEST_INPUT, 10, 10);
+        int numGreen = challenge.getPartOne(10);
+
+        assertEquals(1147, numGreen);
     }
 
 }
