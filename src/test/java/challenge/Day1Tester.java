@@ -1,5 +1,5 @@
 
-package day1;
+package challenge;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+
+import day1.Day1;
 
 public class Day1Tester {
 

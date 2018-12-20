@@ -1,7 +1,9 @@
 
-package day15;
+package challenge;
 
 import org.junit.Test;
+
+import day15.Day15;
 
 public class Day15Tester {
 

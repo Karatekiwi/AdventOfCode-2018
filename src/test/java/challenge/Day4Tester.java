@@ -1,5 +1,5 @@
 
-package day4;
+package challenge;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import day4.Day4;
+import day4.Guard;
+import day4.InputHelper;
 import utils.FileUtils;
 
 public class Day4Tester {

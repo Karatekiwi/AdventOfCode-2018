@@ -11,7 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class FileUtils {
+
+    private static final Logger LOGGER = LogManager.getLogger(FileUtils.class.getName());
 
     public List<Integer> readIntLines(String fileName) {
         List<Integer> intLines = new ArrayList<>();
@@ -31,6 +36,7 @@ public class FileUtils {
 
             return Files.lines(path);
         } catch (Exception ex) {
+            LOGGER.error("Error reading the file: " + ex.getMessage());
             System.exit(1);
         }
 

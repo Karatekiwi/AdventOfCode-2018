@@ -1,5 +1,5 @@
 
-package day6;
+package challenge;
 
 import org.junit.Test;
 

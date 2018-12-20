@@ -120,8 +120,6 @@ public class Day16 {
                 }
             }
         }
-
-        System.out.println(opcodes);
     }
 
     private void removeOpcode(Opcode code) {

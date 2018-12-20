@@ -1,9 +1,11 @@
 
-package day5;
+package challenge;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import day5.Day5;
 
 public class Day5Tester {
 

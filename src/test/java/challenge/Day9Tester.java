@@ -1,5 +1,5 @@
 
-package day9;
+package challenge;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import day9.Day9;
 import utils.FileUtils;
 
 public class Day9Tester {
