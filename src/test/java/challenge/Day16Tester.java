@@ -14,7 +14,7 @@ public class Day16Tester {
     @Test
     public void testPartOne() {
         Day16 challenge = new Day16();
-        challenge.initGame(DAY16_TEST_INPUT, "");
+        challenge.initGame(DAY16_TEST_INPUT, null);
         int numSamples = challenge.getPartOne();
         assertEquals(1, numSamples);
     }

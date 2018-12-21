@@ -9,12 +9,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day10 {
+import challenge.AdventOfCode;
+
+public class Day10 extends AdventOfCode {
 
     private List<Point> points = new ArrayList<>();
     private InputHelper helper = new InputHelper();
 
-    public void initChallenge(List<String> lines) {
+    public void initChallenge(String input) {
+        List<String> lines = readStringLines(input);
+
         for (String line : lines) {
             Point point = helper.extractPoint(line);
             points.add(point);
@@ -105,6 +109,10 @@ public class Day10 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Point> getPoints() {
+        return points;
     }
 
 }

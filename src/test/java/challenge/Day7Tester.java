@@ -3,12 +3,9 @@ package challenge;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
-
 import org.junit.Test;
 
 import day7.Day7;
-import utils.FileUtils;
 
 public class Day7Tester {
 
@@ -16,19 +13,17 @@ public class Day7Tester {
 
     @Test
     public void testCalculate() {
-        FileUtils fileHelper = new FileUtils();
-        List<String> input = fileHelper.readStringLines(DAY7_TEST_INPUT);
-        Day7.prepareSteps(input, 0);
-        Day7.getSequence();
-        assertEquals("CABDFE", Day7.getResult());
+        Day7 challenge = new Day7();
+        challenge.initGame(DAY7_TEST_INPUT, 60);
+        String order = challenge.getPartOne();
+        assertEquals("CABDFE", order);
     }
 
     @Test
     public void testTotalDuration() {
-        FileUtils fileHelper = new FileUtils();
-        List<String> input = fileHelper.readStringLines(DAY7_TEST_INPUT);
-        Day7.prepareSteps(input, 0);
-        int duration = Day7.calculateTotalDuration(2);
+        Day7 challenge = new Day7();
+        challenge.initGame(DAY7_TEST_INPUT, 60);
+        int duration = challenge.getPartTwo(2);
         assertEquals(15, duration);
     }
 

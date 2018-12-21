@@ -14,15 +14,17 @@ public class Day2Tester {
 
     @Test
     public void testChecksum() {
+        Day2 challenge = new Day2();
         List<String> input = Arrays.asList("abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab");
-        int checkSum = Day2.getCheckSum(input);
+        int checkSum = challenge.getCheckSum(input);
         assertEquals(12, checkSum);
     }
 
     @Test
     public void testCommonLetter() {
+        Day2 challenge = new Day2();
         List<String> input = Arrays.asList("abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz");
-        String common = Day2.getCommonLetters(input);
+        String common = challenge.getCommonLetters(input);
         assertEquals("fgij", common);
     }
 

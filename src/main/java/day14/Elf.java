@@ -1,11 +1,3 @@
-/**
-* (C) Copyright 2004 - 2017 CPB Software AG
-* 1020 Wien, Vorgartenstrasse 206c
-* All rights reserved.
-* 
-* Created on : 14 Dec 2018
-* Created by : mawe
-*/
 
 package day14;
 

@@ -7,15 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day5 {
+public class Day5 extends AdventOfCode {
 
-    private static final String DAY5_INPUT_TXT = "day5/input.txt";
-
-    public static void main(String[] args) {
-        FileUtils fileHelper = new FileUtils();
-        List<String> input = fileHelper.readStringLines(DAY5_INPUT_TXT);
+    public void initGame(String path) {
+        List<String> input = readStringLines(path);
         String start = input.get(0);
 
         String finalString = calculateReduced(start);
@@ -25,7 +22,7 @@ public class Day5 {
         System.out.println(String.format("Length of shortest polymere is %s.", numOfUnits));
     }
 
-    public static String calculateReduced(String input) {
+    public String calculateReduced(String input) {
         List<Integer> indexToReplace = new ArrayList<>();
         boolean reduceFound = false;
 
@@ -62,15 +59,15 @@ public class Day5 {
         return calculateReduced(cutInput.toString());
     }
 
-    private static boolean isOppositeCase(Character current, Character next) {
+    private boolean isOppositeCase(Character current, Character next) {
         return Character.isLowerCase(current) != Character.isLowerCase(next);
     }
 
-    private static boolean isSameChar(String current, String next) {
+    private boolean isSameChar(String current, String next) {
         return current.equalsIgnoreCase(next);
     }
 
-    public static int calculateResult(String input) {
+    public int calculateResult(String input) {
         Map<String, Integer> count = new HashMap<>();
         List<String> chars = getCharacters(input);
 
@@ -83,7 +80,7 @@ public class Day5 {
         return shortest;
     }
 
-    private static String getRemoved(String input, String character) {
+    private String getRemoved(String input, String character) {
         String upper = character.toUpperCase();
         String lower = character.toLowerCase();
         input = input.replaceAll(upper, "");
@@ -91,7 +88,7 @@ public class Day5 {
         return input;
     }
 
-    private static List<String> getCharacters(String input) {
+    private List<String> getCharacters(String input) {
         List<String> chars = new ArrayList<>();
 
         for (char character : input.toCharArray()) {

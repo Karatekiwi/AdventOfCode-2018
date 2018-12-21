@@ -6,18 +6,17 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day17 {
+public class Day17 extends AdventOfCode {
 
-    private FileUtils   helper = new FileUtils();
     private List<Point> points = new ArrayList<>();
 
     private Point[][]   area;
     private Point       waterStart;
 
     public void initGame(String file) {
-        List<String> lines = helper.readStringLines(file);
+        List<String> lines = readStringLines(file);
         area = new Point[1000][1000];
         initPoints(lines);
         addSpring();
@@ -26,46 +25,39 @@ public class Day17 {
     public int getPartOne() {
         print();
 
-        int water = 0;
-        while (true) {
-            waterFlows();
-            print();
-            water++;
-
-            if (water == 20) {
-                break;
-            }
-        }
+        waterFlows();
 
         return 0;
     }
 
     private void waterFlows() {
-        Direction dir = Direction.DOWN;
         int x = waterStart.getX();
         int y = waterStart.getY();
-        Point current = area[y][x];
 
-        while (true) {
-            if (current == null) {
-                area[y][x] = createWater(x, y);
+        for (int ys = y; ys < 15; ys++) {
+            Point next = area[ys + 1][x];
+
+            if (isWall(next)) {
+                createWater(x, ys, "~");
+                break;
+            } else {
+                createWater(x, ys, "|");
             }
 
-            current = area[y++][x];
             print();
         }
     }
 
-    private boolean isWall(Point current) {
-        if (current != null && current.getValue().equals("#")) {
+    private boolean isWall(Point point) {
+        if (point != null && point.getValue().equals("#")) {
             return true;
         }
 
         return false;
     }
 
-    private Point createWater(int x, int y) {
-        Point waterPoint = new Point("~");
+    private Point createWater(int x, int y, String symbol) {
+        Point waterPoint = new Point(symbol);
         waterPoint.setX(x);
         waterPoint.setY(y);
 

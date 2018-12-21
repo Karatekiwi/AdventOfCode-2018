@@ -7,15 +7,12 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day2 {
+public class Day2 extends AdventOfCode {
 
-    private static final String DAY2_INPUT_TXT = "day2/input.txt";
-
-    public static void main(String[] args) {
-        FileUtils fileHelper = new FileUtils();
-        List<String> list = fileHelper.readStringLines(DAY2_INPUT_TXT);
+    public void initGame(String path) {
+        List<String> list = readStringLines(path);
 
         int sum = getCheckSum(list);
         System.out.println("The resulting checksum is: " + sum);
@@ -24,7 +21,7 @@ public class Day2 {
         System.out.println("The common letters are: " + match);
     }
 
-    public static int getCheckSum(List<String> boxIds) {
+    public int getCheckSum(List<String> boxIds) {
         int countTwice = 0;
         int countThrice = 0;
 
@@ -65,11 +62,11 @@ public class Day2 {
         return countTwice * countThrice;
     }
 
-    private static List<Character> getCharList(String boxId) {
+    private List<Character> getCharList(String boxId) {
         return boxId.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
     }
 
-    public static String getCommonLetters(List<String> boxIds) {
+    public String getCommonLetters(List<String> boxIds) {
         for (String boxId1 : boxIds) {
 
             for (String boxId2 : boxIds) {
@@ -87,7 +84,7 @@ public class Day2 {
         return "";
     }
 
-    private static String getMatching(String boxId1, String boxId2) {
+    private String getMatching(String boxId1, String boxId2) {
         List<Character> characters1 = getCharList(boxId1);
         List<Character> characters2 = getCharList(boxId2);
         int indexOfMismatch = 0;

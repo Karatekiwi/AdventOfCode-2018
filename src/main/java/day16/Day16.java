@@ -10,11 +10,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day16 {
+public class Day16 extends AdventOfCode {
 
-    private FileUtils            helper       = new FileUtils();
     private List<Sample>         samples      = new ArrayList<>();
     private OpcodeChecker        checker      = new OpcodeChecker();
     private OpcodeCalculator     calculator   = new OpcodeCalculator();
@@ -23,11 +22,13 @@ public class Day16 {
     private List<List<Integer>>  instructions = new ArrayList<>();
 
     public void initGame(String file, String file2) {
-        List<String> lines = helper.readStringLines(file);
-        List<String> lines2 = helper.readStringLines(file2);
-
+        List<String> lines = readStringLines(file);
         parseInput(lines);
-        parseInput2(lines2);
+
+        if (file2 != null) {
+            List<String> lines2 = readStringLines(file2);
+            parseInput2(lines2);
+        }
     }
 
     private void parseInput2(List<String> lines) {
