@@ -5,19 +5,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import challenge.AdventOfCode;
 import day18.Point.Type;
-import utils.FileUtils;
 
-public class Day18 {
-
-    private FileUtils helper = new FileUtils();
+public class Day18 extends AdventOfCode {
 
     private Point[][] area;
 
     private Point[][] cloned;
 
     public void initGame(String file, int sizeX, int sizeY) {
-        List<String> lines = helper.readStringLines(file);
+        List<String> lines = readStringLines(file);
 
         area = new Point[sizeX][sizeY];
 

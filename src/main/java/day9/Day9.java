@@ -8,8 +8,10 @@ import java.util.List;
 
 import org.apache.commons.collections.list.TreeList;
 
+import challenge.AdventOfCode;
+
 @SuppressWarnings("unchecked")
-public class Day9 {
+public class Day9 extends AdventOfCode {
 
     private InputHelper  helper       = new InputHelper();
 
@@ -22,12 +24,24 @@ public class Day9 {
 
     private List<Player> players;
 
-    public void initGame(String line) {
+    public void initGame(String path, Integer mulitplicator) {
+        List<String> lines = readStringLines(path);
+        String line = lines.get(0);
+
         numPlayers = helper.extractPlayers(line);
         numMarbles = helper.extractNumMarbles(line);
+
+        if (mulitplicator != null) {
+            numMarbles = numMarbles * mulitplicator;
+        }
+
         result = helper.extractResult(line);
 
         players = initPlayers();
+    }
+
+    public void initGame(String path) {
+        initGame(path, null);
     }
 
     private List<Player> initPlayers() {

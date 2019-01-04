@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day12 {
-
-    private FileUtils     helper       = new FileUtils();
+public class Day12 extends AdventOfCode {
 
     private int           generations  = 20;
 
@@ -17,7 +15,7 @@ public class Day12 {
     private List<Plant>   plants       = new ArrayList<>();
 
     public void initGame(String file) {
-        List<String> input = helper.readStringLines(file);
+        List<String> input = readStringLines(file);
         initInitialState(input.get(0));
         initPlantPattern(input);
     }

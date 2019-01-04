@@ -1,5 +1,13 @@
+/**
+* (C) Copyright 2004 - 2017 CPB Software AG
+* 1020 Wien, Vorgartenstrasse 206c
+* All rights reserved.
+* 
+* Created on : 21 Dec 2018
+* Created by : mawe
+*/
 
-package utils;
+package challenge;
 
 import java.net.URI;
 import java.net.URL;
@@ -13,8 +21,9 @@ import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.util.FileUtils;
 
-public class FileUtils {
+public class AdventOfCode {
 
     private static final Logger LOGGER = LogManager.getLogger(FileUtils.class.getName());
 
@@ -48,4 +57,5 @@ public class FileUtils {
             return lines.collect(Collectors.toList());
         }
     }
+
 }

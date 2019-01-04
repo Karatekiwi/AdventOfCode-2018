@@ -4,18 +4,16 @@ package day1;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day1 {
+public class Day1 extends AdventOfCode {
 
-    private static final String  DAY1_INPUT_TXT = "day1/input.txt";
-    private static List<Integer> existing       = new ArrayList<>();
+    private List<Integer> existing = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public void initGame(String path) {
         int fequency = 0;
 
-        FileUtils fileHelper = new FileUtils();
-        List<Integer> numbers = fileHelper.readIntLines(DAY1_INPUT_TXT);
+        List<Integer> numbers = readIntLines(path);
 
         int newFrequency = calculateFrequency(fequency, numbers);
         int duplicate = findFirstDuplicate(fequency, numbers);
@@ -24,12 +22,12 @@ public class Day1 {
         System.out.println("The first duplicate is : " + duplicate);
     }
 
-    public static int calculateFrequency(int start, List<Integer> numbers) {
+    public int calculateFrequency(int start, List<Integer> numbers) {
         int sum = numbers.stream().mapToInt(Integer::intValue).sum();
         return start + sum;
     }
 
-    public static int findFirstDuplicate(int start, List<Integer> numbers) {
+    public int findFirstDuplicate(int start, List<Integer> numbers) {
         int calculateStart = start;
 
         for (Integer num : numbers) {

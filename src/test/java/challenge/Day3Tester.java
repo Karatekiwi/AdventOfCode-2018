@@ -81,53 +81,59 @@ public class Day3Tester {
 
     @Test
     public void testTransferToClaim() {
+        Day3 challenge = new Day3();
         List<String> input = Arrays.asList(claim1, claim2, claim3);
 
-        List<Claim> claims = Day3.transferToClaims(input);
+        List<Claim> claims = challenge.transferToClaims(input);
         assertEquals(3, claims.size());
     }
 
     @Test
     public void testMaxHeight() {
+        Day3 challenge = new Day3();
         List<String> input = Arrays.asList(claim1, claim2, claim3);
 
-        List<Claim> claims = Day3.transferToClaims(input);
+        List<Claim> claims = challenge.transferToClaims(input);
         assertEquals(3, claims.size());
 
-        int maxHeight = Day3.getMaxHeight(claims);
+        int maxHeight = challenge.getMaxHeight(claims);
         assertEquals(8, maxHeight);
     }
 
     @Test
     public void testMaxWidth() {
+        Day3 challenge = new Day3();
         List<String> input = Arrays.asList(claim1, claim2, claim3);
 
-        List<Claim> claims = Day3.transferToClaims(input);
+        List<Claim> claims = challenge.transferToClaims(input);
         assertEquals(3, claims.size());
 
-        int maxWidth = Day3.getMaxWidth(claims);
+        int maxWidth = challenge.getMaxWidth(claims);
         assertEquals(8, maxWidth);
     }
 
     @Test
     public void testFillFabric() {
+        Day3 challenge = new Day3();
         List<String> input = Arrays.asList(claim1, claim2, claim3);
 
-        List<Claim> claims = Day3.transferToClaims(input);
+        List<Claim> claims = challenge.transferToClaims(input);
         assertEquals(3, claims.size());
 
-        int countOverlappings = Day3.countOverlappings(claims);
+        int countOverlappings = challenge.countOverlappings(claims);
         assertEquals(4, countOverlappings);
     }
 
     @Test
     public void testNoOverlap() {
+        Day3 challenge = new Day3();
         List<String> input = Arrays.asList(claim1, claim2, claim3);
 
-        List<Claim> claims = Day3.transferToClaims(input);
+        List<Claim> claims = challenge.transferToClaims(input);
         assertEquals(3, claims.size());
 
-        Day3.getNoOverlap(claims);
+        int noOverlap = challenge.getNoOverlap(claims);
+        assertEquals(3, noOverlap);
     }
 
 }

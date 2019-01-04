@@ -4,9 +4,9 @@ package day8;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day8 {
+public class Day8 extends AdventOfCode {
 
     private List<Integer> numbers;
     private List<Node>    nodes = new ArrayList<>();
@@ -14,8 +14,7 @@ public class Day8 {
     private int           rootValue;
 
     public void initInput(String input) {
-        FileUtils fileHelper = new FileUtils();
-        List<String> lines = fileHelper.readStringLines(input);
+        List<String> lines = readStringLines(input);
 
         numbers = getNumbers(lines.get(0));
         createNode(null);

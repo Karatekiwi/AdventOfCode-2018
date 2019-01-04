@@ -1,16 +1,12 @@
 
 package day19;
 
-import java.util.List;
+import challenge.AdventOfCode;
 
-import utils.FileUtils;
+public class Day19 extends AdventOfCode {
 
-public class Day19 {
+    public void initGame(String file) {
 
-    private FileUtils helper = new FileUtils();
-
-    public void initGame(String file, int sizeX, int sizeY) {
-        List<String> lines = helper.readStringLines(file);
     }
 
 }

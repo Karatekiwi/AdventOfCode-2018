@@ -6,16 +6,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day3 {
+public class Day3 extends AdventOfCode {
 
-    private static final String DAY3_INPUT_TXT = "day3/input.txt";
-    private static InputHelper  helper         = new InputHelper();
+    InputHelper helper = new InputHelper();
 
-    public static void main(String[] args) {
-        FileUtils fileHelper = new FileUtils();
-        List<String> input = fileHelper.readStringLines(DAY3_INPUT_TXT);
+    public void initGame(String path) {
+        List<String> input = readStringLines(path);
 
         List<Claim> claims = transferToClaims(input);
         int countOverlappings = countOverlappings(claims);
@@ -25,7 +23,7 @@ public class Day3 {
         System.out.println(String.format("The claim with no overlap has the following id: %s.", noOverlap));
     }
 
-    public static int countOverlappings(List<Claim> claims) {
+    public int countOverlappings(List<Claim> claims) {
         List<Field> overlappings = new ArrayList<>();
 
         String fabric[][] = new String[getMaxWidth(claims)][getMaxHeight(claims)];
@@ -36,7 +34,7 @@ public class Day3 {
         return overlappings.size();
     }
 
-    private static void fillFabric(List<Claim> claims, List<Field> overlappings, String[][] fabric) {
+    private void fillFabric(List<Claim> claims, List<Field> overlappings, String[][] fabric) {
         for (Claim claim : claims) {
             int id = claim.getId();
             int leftMargin = claim.getLeftMargin();
@@ -70,7 +68,7 @@ public class Day3 {
         }
     }
 
-    public static int getNoOverlap(List<Claim> claims) {
+    public int getNoOverlap(List<Claim> claims) {
         String fabric[][] = new String[getMaxWidth(claims)][getMaxHeight(claims)];
 
         fillFabric(claims, null, fabric);
@@ -105,7 +103,7 @@ public class Day3 {
         return noOverlapId;
     }
 
-    public static void print(String[][] fabric) {
+    public void print(String[][] fabric) {
         for (String[] name : fabric) {
             for (String string : name) {
                 if (string == null) {
@@ -118,7 +116,7 @@ public class Day3 {
         }
     }
 
-    public static int getMaxHeight(List<Claim> claims) {
+    public int getMaxHeight(List<Claim> claims) {
         Optional<Claim> max = claims.stream().max(new Comparator<Claim>() {
 
             @Override
@@ -133,7 +131,7 @@ public class Day3 {
         return max.get().getHeight() + max.get().getTopMargin() + 1;
     }
 
-    public static int getMaxWidth(List<Claim> claims) {
+    public int getMaxWidth(List<Claim> claims) {
         Optional<Claim> max = claims.stream().max(new Comparator<Claim>() {
 
             @Override
@@ -148,7 +146,7 @@ public class Day3 {
         return max.get().getWidth() + max.get().getLeftMargin() + 1;
     }
 
-    public static List<Claim> transferToClaims(List<String> inputList) {
+    public List<Claim> transferToClaims(List<String> inputList) {
         List<Claim> claims = new ArrayList<>();
 
         for (String input : inputList) {

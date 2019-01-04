@@ -12,7 +12,7 @@ public class Day19Tester {
     @Test
     public void testPartOne() {
         Day19 challenge = new Day19();
-        challenge.initGame(DAY19_TEST_INPUT, 7, 7);
+        challenge.initGame(DAY19_TEST_INPUT);
     }
 
 }

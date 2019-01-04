@@ -8,12 +8,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day13 {
+public class Day13 extends AdventOfCode {
 
     private String[][]     grid;
-    private FileUtils      helper           = new FileUtils();
     private MovementHelper movement         = new MovementHelper();
     private List<Cart>     carts            = new ArrayList<>();
     boolean                noCrash          = true;
@@ -27,7 +26,7 @@ public class Day13 {
     public void initGame(String file, int sizeX, int sizeY) {
         grid = new String[sizeX][sizeY];
 
-        List<String> lines = helper.readStringLines(file);
+        List<String> lines = readStringLines(file);
         initGrid(lines);
         initCarts();
     }

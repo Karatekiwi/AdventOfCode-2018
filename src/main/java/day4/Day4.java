@@ -12,33 +12,36 @@ import java.util.Map.Entry;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day4 {
+public class Day4 extends AdventOfCode {
 
-    private static final String DAY4_INPUT_TXT = "day4/input.txt";
+    private final String GUARD        = "Guard";
+    private final String WAKES_UP     = "wakes up";
+    private final String FALLS_ASLEEP = "falls asleep";
 
-    private static final String GUARD          = "Guard";
-    private static final String WAKES_UP       = "wakes up";
-    private static final String FALLS_ASLEEP   = "falls asleep";
+    private InputHelper  helper       = new InputHelper();
+    private List<Guard>  guards;
 
-    private static InputHelper  helper         = new InputHelper();
-
-    public static void main(String[] args) {
-        FileUtils fileHelper = new FileUtils();
-        List<String> input = fileHelper.readStringLines(DAY4_INPUT_TXT);
+    public void initGame(String path) {
+        List<String> input = readStringLines(path);
 
         Map<Date, String> timeline = helper.getTimeline(input);
-        List<Guard> guards = transferToGuard(timeline);
-
-        int solution = calculateMostLazyGuard(guards);
-        System.out.println(String.format("The solution for part 1 is %s.", solution));
-
-        int sleep = calculateMostSleepMinutes(guards);
-        System.out.println(String.format("The solution for part 2 is %s.", sleep));
+        guards = transferToGuard(timeline);
     }
 
-    public static int calculateMostSleepMinutes(List<Guard> guards) {
+    public int getPartOne() {
+        int solution = calculateMostLazyGuard(guards);
+        return solution;
+
+    }
+
+    public int getPartTwo() {
+        int sleep = calculateMostSleepMinutes(guards);
+        return sleep;
+    }
+
+    public int calculateMostSleepMinutes(List<Guard> guards) {
         for (Guard guard : guards) {
             Map<Integer, Long> collect = guard.getSleep().stream().collect(Collectors.groupingBy(g -> g, Collectors.counting()));
 
@@ -56,7 +59,7 @@ public class Day4 {
         return guard.getId() * guard.getMaxSleepMinute();
     }
 
-    public static int calculateMostLazyGuard(List<Guard> guards) {
+    public int calculateMostLazyGuard(List<Guard> guards) {
         Comparator<Guard> guardCmp = Comparator.comparing(Guard::getSleep, (g1, g2) -> {
             return Integer.compare(g1.size(), g2.size());
         });
@@ -71,13 +74,13 @@ public class Day4 {
         return guardId * minute;
     }
 
-    private static Integer findMostOccurences(Guard guard) {
+    private Integer findMostOccurences(Guard guard) {
         return guard.getSleep().stream()
             .reduce(BinaryOperator.maxBy((g1, g2) -> Collections.frequency(guard.getSleep(), g1) - Collections.frequency(guard.getSleep(), g2)))
             .orElse(null);
     }
 
-    public static List<Guard> transferToGuard(Map<Date, String> timeline) {
+    public List<Guard> transferToGuard(Map<Date, String> timeline) {
         List<Guard> guards = new ArrayList<>();
 
         Guard guard = null;
@@ -119,11 +122,11 @@ public class Day4 {
         return guards;
     }
 
-    private static Guard findOrCreateGuard(List<Guard> guards, int id) {
+    private Guard findOrCreateGuard(List<Guard> guards, int id) {
         return guards.stream().filter(guard -> guard.getId() == id).findFirst().orElse(null);
     }
 
-    private static List<Integer> getSleepMinutes(int startSleep, int endSleep) {
+    private List<Integer> getSleepMinutes(int startSleep, int endSleep) {
         List<Integer> minutes = new ArrayList<>();
 
         for (int index = 1; index <= 60; index++) {

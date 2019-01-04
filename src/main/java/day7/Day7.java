@@ -9,28 +9,17 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import utils.FileUtils;
+import challenge.AdventOfCode;
 
-public class Day7 {
+public class Day7 extends AdventOfCode {
 
-    private static final String DAY7_INPUT_TXT = "day7/input.txt";
+    private List<Step> steps;
 
-    private static List<Step>   steps;
+    private List<Step> result         = new ArrayList<>();
+    private List<Step> tasksFinished  = new ArrayList<>();
+    private int        durationOffset = 0;
 
-    private static List<Step>   result         = new ArrayList<>();
-    private static List<Step>   tasksFinished  = new ArrayList<>();
-
-    public static void main(String[] args) {
-        FileUtils fileHelper = new FileUtils();
-        List<String> input = fileHelper.readStringLines(DAY7_INPUT_TXT);
-        prepareSteps(input, 60);
-        getSequence();
-        System.out.println(getResult());
-        int completed = calculateTotalDuration(5);
-        System.out.println(String.format("It took %s seconds to finish all tasks", completed));
-    }
-
-    public static int calculateTotalDuration(int numWorkers) {
+    public int calculateTotalDuration(int numWorkers) {
         int freeWorkers = numWorkers;
         List<Step> inProgress = new ArrayList<>();
 
@@ -72,13 +61,13 @@ public class Day7 {
         return second;
     }
 
-    public static void getSequence() {
+    public void getSequence() {
         while (result.size() < steps.size()) {
             addNextStep();
         }
     }
 
-    public static String getResult() {
+    public String getResult() {
         String resultString = "";
         for (Step step : result) {
             resultString = resultString += step.getId();
@@ -87,18 +76,18 @@ public class Day7 {
         return resultString;
     }
 
-    private static void addNextStep() {
+    private void addNextStep() {
         List<Step> availableSteps = getAvailableSteps(result);
         Step chosen = chooseStep(availableSteps);
         result.add(chosen);
     }
 
-    private static Step chooseStep(List<Step> availableSteps) {
+    private Step chooseStep(List<Step> availableSteps) {
         Collections.sort(availableSteps, getComparator());
         return availableSteps.get(0);
     }
 
-    private static List<Step> getAvailableSteps(List<Step> toCheck) {
+    private List<Step> getAvailableSteps(List<Step> toCheck) {
         List<Step> available = new ArrayList<>();
         for (Step step : steps) {
             if (toCheck.contains(step)) {
@@ -117,7 +106,7 @@ public class Day7 {
         return available;
     }
 
-    private static Comparator<Step> getComparator() {
+    private Comparator<Step> getComparator() {
         return new Comparator<Step>() {
 
             @Override
@@ -127,7 +116,7 @@ public class Day7 {
         };
     }
 
-    private static boolean checkPresteps(Step step, List<Step> toCheck) {
+    private boolean checkPresteps(Step step, List<Step> toCheck) {
         for (Step preStep : step.getPreStep()) {
             if (!toCheck.contains(preStep)) {
                 return false;
@@ -137,7 +126,7 @@ public class Day7 {
         return true;
     }
 
-    public static void prepareSteps(List<String> input, int duration) {
+    public void prepareSteps(List<String> input, int duration) {
         steps = getAllSteps(input, duration);
 
         for (Step step : steps) {
@@ -152,22 +141,23 @@ public class Day7 {
 
     }
 
-    private static int calculateDuraction(Step found, int duration) {
+    private int calculateDuraction(Step found, int duration) {
         int num = stringToNumber(found.getId());
         return num + duration;
     }
 
-    public static int stringToNumber(String s) {
+    public int stringToNumber(String s) {
         char ch = s.charAt(0);
-        int result = (int) ch - 64;
+        int result = ch - 64;
+        result = result - durationOffset;
         return result;
     }
 
-    private static Step findStepById(String stepId) {
+    private Step findStepById(String stepId) {
         return steps.stream().filter(step -> step.getId().equals(stepId)).findFirst().get();
     }
 
-    public static List<Step> getAllSteps(List<String> input, int duration) {
+    public List<Step> getAllSteps(List<String> input, int duration) {
         List<Step> steps = new ArrayList<>();
         for (String line : input) {
             String stepId1 = find(line, "Step");
@@ -179,7 +169,7 @@ public class Day7 {
         return steps;
     }
 
-    private static void addStep(List<Step> steps, String stepId, int duration) {
+    private void addStep(List<Step> steps, String stepId, int duration) {
         Step step = new Step(stepId);
 
         if (!steps.contains(step)) {
@@ -188,7 +178,7 @@ public class Day7 {
         }
     }
 
-    public static String find(String line, String search) {
+    public String find(String line, String search) {
         Pattern pattern = Pattern.compile(search + "(\\W+(\\w+))");
         Matcher matcher = pattern.matcher(line);
 
@@ -198,6 +188,23 @@ public class Day7 {
         }
 
         return "";
+    }
+
+    public void initGame(String path, int durationOffset) {
+        this.durationOffset = durationOffset;
+
+        List<String> input = readStringLines(path);
+        prepareSteps(input, 60);
+    }
+
+    public String getPartOne() {
+        getSequence();
+        return getResult();
+    }
+
+    public int getPartTwo(int numWorkers) {
+        int completed = calculateTotalDuration(numWorkers);
+        return completed;
     }
 
 }
